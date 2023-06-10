@@ -2,7 +2,7 @@
 // Input not fully filled out, submit stills work
 
 //global variable
-let totalSalary = 0;
+let totalMonthly = 0;
 
 // DOM
 $(document).ready(onReady);
@@ -10,16 +10,13 @@ $(document).ready(onReady);
 // onReady FUNCTION
 function onReady() {
   // TEST
-  console.log("JQ Ready");
+  // console.log("JQ Ready");
 
   // EVENT LISTENER
   // submit button
-  $("#submit-btn").on("click", handleButton);
+  $(".submit-btn").on("click", handleButton);
   // delete button
   $("#table-input").on("click", ".delete-btn", deleteButton);
-
-  // red background if totalSalary > 20000
-  $("#total-annual-salary-input").addClass("red-background");
 }
 
 // EVENT HANDLER
@@ -38,11 +35,11 @@ function handleButton(e) {
   let titleInput = $("#title-input").val();
   //   console.log("Title submitted", titleInput);
   // Check if annualSalaryInput is a valid number
-  let annualSalaryInput = Number($("#annual-salary-input").val());
+  let annualSalaryInput = parseFloat($("#annual-salary-input").val());
   //   console.log("Annual Salary submitted", annualSalaryInput);
   if (isNaN(annualSalaryInput)) {
     // Alert when the input is not a valid number
-    alert("Invalid annual salary");
+    alert("Invalid entry, try again");
     return;
   }
 
@@ -56,20 +53,21 @@ function handleButton(e) {
     <td>${lnameInput}</td>
     <td>${idInput}</td>
     <td>${titleInput}</td>
-    <td data-monthly-salary="${monthlySalary}">$${annualSalaryInput}</td>
+    <td >${annualSalaryInput}</td>
     <td><button class="delete-btn">Delete</button></td>
     </tr>
 `);
 
   // ADD ANNUAL SALARY TO TOTAL MONTHLY
-  totalSalary += monthlySalary;
+  totalMonthly += monthlySalary;
   // calculate monthly costs and append this to the to DOM
-  $("#total-annual-salary-input").text(totalSalary);
-  //  console.log('total salary', totalSalary);
+  $("#total-monthly-salary").text(totalMonthly);
+  //  console.log('total salary', totalMonthly);
 
-  // If the total monthly cost exceeds $20,000, add a red background color to the total monthly cost.
-  if (totalSalary > 20000) {
-    $("#total-annual-salary-input").addClass("red-background");
+  // If the total monthly cost exceeds $20,000, add a red background color to the total monthly cost
+  // can't get this to work
+  if (totalMonthly >= 20000) {
+    $("h3").addClass("red-background");
     alert("MONTH COST IS OVER $20,000!!!");
   }
 
@@ -81,23 +79,48 @@ function handleButton(e) {
   $("#annual-salary-input").val("");
 }
 
-// deleteButton function
+
+// THIS DOES NOT WORK
+// // deleteButton function
+// function deleteButton() {
+//   //   console.log("Deleted");
+
+//   // CALCULATE monthly salary after delete button
+//   let monthlySalary = Number($(this).parent().siblings().first().data("monthly-salary"));
+//   $(this).parent().parent().remove();
+
+//   // update
+//   totalMonthly -= monthlySalary;
+//   $("#total-monthly-salary").text(totalMonthly);
+
+//   // If the total monthly cost under $20,000, remove the red background color to the total monthly cost.
+//   if (totalMonthly <= 20000) {
+//     $("h3").removeClass("red-background");
+//   }
+// }
+
 function deleteButton() {
-  //   console.log("Deleted");
-
-  // CALCULATE monthly salary after delete button
-  let monthlySalary = Number(
-    $(this).parent().siblings().first().data("monthly-salary")
+  // Calculate the monthly salary of the deleted row
+  let $row = $(this).closest("tr");
+  let annualSalaryInput = parseFloat(
+    $row.find("td:nth-child(5)").text()
   );
-  $(this).parent().parent().remove();
-  totalSalary -= monthlySalary;
-  $("#total-annual-salary-input").text(totalSalary);
+   // console.log('annual salary input:', annualSalaryInput)
+  let monthlySalary = annualSalaryInput / 12;
 
-  // If the total monthly cost under $20,000, remove the red background color to the total monthly cost.
-  if (totalSalary < 20000) {
-    $("#total-annual-salary-input").removeClass("red-background");
+  // Remove the row from the table
+  $row.remove();
+
+  // Update the total salary
+  totalMonthly -= monthlySalary;
+  $("#total-monthly-salary").text(totalMonthly);
+
+  // Remove the red background if the total monthly cost is under $20,000
+  // can't get this to work 
+  if (totalMonthly <= 20000) {
+    $("h3").removeClass("red-background");
   }
 }
 
 // TEST
-console.log("Testing outside onReady");
+// console.log("Testing outside onReady");
