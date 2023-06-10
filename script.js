@@ -1,3 +1,6 @@
+// Issues to address, NaN -> calculator doesn't work
+// Input not fully filled out, submit stills work
+
 //global variable
 let totalSalary = 0;
 
@@ -16,13 +19,11 @@ function onReady() {
   $("#table-input").on("click", ".delete-btn", deleteButton);
 
   // red background if totalSalary > 20000
-  $('#total-annual-salary-input').addClass('red-background');
-
+  $("#total-annual-salary-input").addClass("red-background");
 }
 
-
-// EVENT HANDLER 
-// handleButton function 
+// EVENT HANDLER
+// handleButton function
 function handleButton(e) {
   // console.log('button clicked');
   e.preventDefault();
@@ -36,56 +37,67 @@ function handleButton(e) {
   //   console.log("ID submitted", idInput);
   let titleInput = $("#title-input").val();
   //   console.log("Title submitted", titleInput);
+  // Check if annualSalaryInput is a valid number
   let annualSalaryInput = Number($("#annual-salary-input").val());
   //   console.log("Annual Salary submitted", annualSalaryInput);
+  if (isNaN(annualSalaryInput)) {
+    // Alert when the input is not a valid number
+    alert("Invalid annual salary");
+    return;
+  }
+
+  // CALCULATE monthly salary after submit button
+  let monthlySalary = annualSalaryInput / 12;
 
   // APPEND INPUT TO TABLE
   $("#table-input").append(`
     <tr>
-        <td>${fnameInput}</td>
-        <td>${lnameInput}</td>
-        <td>${idInput}</td>
-        <td>${titleInput}</td>
-        <td>$${annualSalaryInput}</td>
-        <td><button class="delete-btn">Delete</button></td>
+    <td>${fnameInput}</td>
+    <td>${lnameInput}</td>
+    <td>${idInput}</td>
+    <td>${titleInput}</td>
+    <td data-monthly-salary="${monthlySalary}">$${annualSalaryInput}</td>
+    <td><button class="delete-btn">Delete</button></td>
     </tr>
 `);
 
-// ADD ANNUAL SALARY TO TOTAL MONTHLY 
-totalSalary += annualSalaryInput/3;
+  // ADD ANNUAL SALARY TO TOTAL MONTHLY
+  totalSalary += monthlySalary;
+  // calculate monthly costs and append this to the to DOM
+  $("#total-annual-salary-input").text(totalSalary);
+  //  console.log('total salary', totalSalary);
 
-// calculate monthly costs and append this to the to DOM
-$('#total-annual-salary-input').text(totalSalary);
-//  console.log('total salary', totalSalary);
-
-// If the total monthly cost exceeds $20,000, add a red background color to the total monthly cost.
+  // If the total monthly cost exceeds $20,000, add a red background color to the total monthly cost.
   if (totalSalary > 20000) {
-  $('#total-annual-salary-input').css("background-color", "red");
-  alert('MONTH COST IS OVER $20,000!!!');
+    $("#total-annual-salary-input").addClass("red-background");
+    alert("MONTH COST IS OVER $20,000!!!");
   }
-
 
   // CLEAR INPUT FROM TABLE
   $("#fname-input").val("");
   $("#lname-input").val("");
   $("#id-input").val("");
   $("#title-input").val("");
-  $("#annual-salary-input").val(0);
+  $("#annual-salary-input").val("");
 }
 
-
-// deleteButton function 
+// deleteButton function
 function deleteButton() {
-//   console.log("Deleted");
-  $(this).parent().parent().remove();
-}
+  //   console.log("Deleted");
 
+  // CALCULATE monthly salary after delete button
+  let monthlySalary = Number(
+    $(this).parent().siblings().first().data("monthly-salary")
+  );
+  $(this).parent().parent().remove();
+  totalSalary -= monthlySalary;
+  $("#total-annual-salary-input").text(totalSalary);
+
+  // If the total monthly cost under $20,000, remove the red background color to the total monthly cost.
+  if (totalSalary < 20000) {
+    $("#total-annual-salary-input").removeClass("red-background");
+  }
+}
 
 // TEST
 console.log("Testing outside onReady");
-
-
-
-
-// Issues to address, NaN -> calculator doesn't work
-// Input not fully filled out, submit stills work
