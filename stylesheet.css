@@ -1,111 +1,114 @@
 /* BODY */
 body {
-    background-color: #f1f0fa;
-    font-family: 'Roboto', sans-serif;
-    font-size: 1.25em;
-  }
-  
-  html, body {
-    min-height: 100vh;
-    margin: auto;
-  }
-  
-  body {
-    display: flex;
-    flex-direction: column;
-    margin-left: auto;
-    margin-right: auto;
-  }
+  background-color: #f1f0fa;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.25em;
+}
 
-  h1 {
-    color: #f1f0fa ;
-  }
-  h2 {
-    margin-left: 20px;
-    padding: 5px;
-    margin-top: 25px;
-    margin-bottom: 10px;
-    color: #272059;
-  }
-  
-  h3 {
-    text-align : right;
-    margin-right: 25px;
-    color: #272059;
-  }
-  
+html,
+body {
+  min-height: 100vh;
+  margin: auto;
+}
 
-  /* HEADER/FOOTER */
-  header {  
-    background-color: #272059 ;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
-  
-  footer {
-    justify-content: end;
-    color: #272059;
-    margin-right: 25px;
-  }
+body {
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+}
 
+h1 {
+  color: #f1f0fa;
+}
+h2 {
+  margin-left: 20px;
+  padding: 5px;
+  margin-top: 25px;
+  margin-bottom: 10px;
+  color: #272059;
+}
+
+h3 {
+  text-align: right;
+  margin-right: 25px;
+  color: #272059;
+}
+
+.red-background {
+  background-color: red;
+}
+
+/* HEADER/FOOTER */
+header {
+  background-color: #272059;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+footer {
+  justify-content: end;
+  color: #272059;
+  margin-right: 25px;
+}
 
 /* FORM ELEMENTS */
-  input {
-    font-family: arial, sans-serif;
-    padding: 10px;
-    width: 230px;
-    background: #FCFCFC;
-    border: 1px solid;
-    margin-left: 25px;
-    margin-top: 10px;
-    margin-bottom: 5px;
-  }
-  
-  .submit-btn {
-    padding: 10px;
-    margin-top: 20px;
-    margin-left: 25px;
-    margin-right: 25px;
-    width: 80px;
-    background-color: #1c1740;
-    color:#f1f0fa
-  }
+input {
+  font-family: arial, sans-serif;
+  padding: 10px;
+  width: 230px;
+  background: #fcfcfc;
+  border: 1px solid;
+  margin-left: 25px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
 
-  /* how to make button to the right */
-  .delete-btn {
-    padding: 10px;
-    width: 100px;
-    background-color: #4d40b1;
-    color:#f1f0fa;
-  }
+.submit-btn {
+  padding: 10px;
+  margin-top: 20px;
+  margin-left: 25px;
+  margin-right: 25px;
+  width: 80px;
+  background-color: #1c1740;
+  color: #f1f0fa;
+}
 
+/* how to make button to the right */
+.delete-btn {
+  padding: 10px;
+  width: 100px;
+  background-color: #4d40b1;
+  color: #f1f0fa;
+}
 
- /* TABLE ELEMENT */ 
+/* TABLE ELEMENT */
 table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 96%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  th {
-    background-color: #372e7e;
-    color:#f1f0fa;
-    font-family: arial, sans-serif;
-  }
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 96%;
+  margin-left: auto;
+  margin-right: auto;
+}
 
-  th, td {
-    border: 1px solid #000000;
-    text-align: center;
-    border-collapse: collapse;
-    padding: 10px;
-    font-family: arial, sans-serif;
-  }
+th {
+  background-color: #372e7e;
+  color: #f1f0fa;
+  font-family: arial, sans-serif;
+}
 
-  tr:nth-child(even) {
-    background-color: #d1ceed;
-  }
+th,
+td {
+  border: 1px solid #000000;
+  text-align: center;
+  border-collapse: collapse;
+  padding: 10px;
+  font-family: arial, sans-serif;
+}
+
+tr:nth-child(even) {
+  background-color: #d1ceed;
+}
