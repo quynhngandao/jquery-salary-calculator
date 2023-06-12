@@ -102,13 +102,13 @@ function handleButton(e) {
 // EVENT DELEGATION
 function deleteButton() {
   // Calculate the monthly salary of the deleted row
-  let $row = $(this).closest("tr");
-  let annualSalaryInput = parseFloat($row.find("td:nth-child(5)").text());
+  let row = $(this).closest("tr");
+  let annualSalaryInput = parseFloat(row.find("td:nth-child(5)").text());
   // console.log('annual salary input:', annualSalaryInput)
   let monthlySalary = annualSalaryInput / 12;
 
   // Remove the row from the table
-  $row.remove();
+  row.remove();
  
   /* ANOTHER APPROACH: 
   let monthlySalary = parseFloat($(this).parent().siblings().first().data("monthly-salary"));
