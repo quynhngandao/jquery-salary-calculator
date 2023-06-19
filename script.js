@@ -1,19 +1,3 @@
-// Total monthly not reflecting yellow highlight
-
-// PSEUDO CODE
-// onReady function for event listener
-// EVENT HANDLER handleButton that when submit button is clicked, grab input value from form
-// append the input to a table
-// make sure annual salary is a valid number and all the inputs filled out
-// calculate monthly salary & add to total monthly
-// update the total monthly text
-// if total monthly > 20000 then add red highlight
-
-// EVENT DELEGATION deleteButton that when delete button is clicked, remove the input value from table
-// remove input from table
-// update the total monthly text
-// if total monthly < 20000 then remove red highlight
-
 $(document).ready(onReady);
 
 // Global variable
@@ -109,7 +93,7 @@ function deleteButton() {
 
   // Remove the row from the table
   row.remove();
- 
+
   /* ANOTHER APPROACH: 
   let monthlySalary = parseFloat($(this).parent().siblings().first().data("monthly-salary"));
   $(this).parent().parent().remove(); */
